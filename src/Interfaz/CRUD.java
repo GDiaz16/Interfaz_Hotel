@@ -11,19 +11,18 @@ import javax.swing.JOptionPane;
 public class CRUD {
 
     private static Connection conexion;
-    private static String bd = "museos";
-    private static String user = "root";
-    private static String password = "";
-    private static String host = "localhost";
+    private static String bd = "hotel";
+     private static String host = "localhost";
     private static String server = "jdbc:mysql://" + host + "/" + bd;
 
-    public void llamada() {
-        String tipoObra = JOptionPane.showInputDialog("Tipo de obra");
+    public void call() {
         try {
-            // Preparamos la actualización del registro con id = 5
+            //esta variable es para colocar el parametro del metodo que se esta llamando
+            String parameter = "";
+            // Llamar procedimientos almacenados
             PreparedStatement parametro = conexion.prepareStatement(
                     "CALL aumento(?);");
-            parametro.setString(1, tipoObra);
+            parametro.setString(1, parameter);
 
             int retorno = parametro.executeUpdate();
 
@@ -33,12 +32,13 @@ public class CRUD {
     }
 
     public void delete() {
-        String idObra = JOptionPane.showInputDialog("Id de la obra a borrar");
+        //id de lo que se vaya a borrar
+        String id = "";
         try {
-            // Preparamos la actualización del registro con id = 5
+            // Preparamos el delete
             PreparedStatement borrar = conexion.prepareStatement(
                     "DELETE FROM obra WHERE Id_obra = ?");
-            borrar.setString(1, idObra);
+            borrar.setString(1, id);
 
             int retorno = borrar.executeUpdate();
 
@@ -64,8 +64,8 @@ public class CRUD {
 
     public void update() {
         //realizar update
-        int idObra = Integer.parseInt(JOptionPane.showInputDialog("Id de la obra"));
-        int costoObra = Integer.parseInt(JOptionPane.showInputDialog("Nuevo costo de la obra"));
+        int idObra = 0;
+        int costoObra = 0 ;
         try {
             // Preparamos la actualización del registro con id = 5
             PreparedStatement actualizar = conexion.prepareStatement(
@@ -81,7 +81,7 @@ public class CRUD {
     }
 
     public void consulta() {
-        String tabla = JOptionPane.showInputDialog("Nombre tabla (obra, museo)");
+        String tabla = "";
         try {
             // Preparamos la consulta
             Statement s = conexion.createStatement();
@@ -108,37 +108,19 @@ public class CRUD {
         }
     }
 
-    public void principal() {
-        String funcion = JOptionPane.showInputDialog("Numero funcion \n1.Select \n2.Update \n3.Delete \n4.Aumento \n5. Insert");
-        CRUD cn = new CRUD();
+    public void principal(String user, String password) {
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
-            System.out.println("Conexión a base de datos " + server + " ... OK");
+            JOptionPane.showMessageDialog(null,"Conexión a base de datos " + bd + " ... OK", "Informaccion Conexion",1);
+           
         } catch (ClassNotFoundException ex) {
             System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
         } catch (SQLException ex) {
             System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
         }
-        switch (funcion) {
-            case "1":
-                cn.consulta();
-                break;
-
-            case "2":
-                cn.update();
-                break;
-
-            case "3":
-                cn.delete();
-                break;
-            case "4":
-                cn.llamada();
-                break;
-            case "5":
-                cn.insert();
-                break;
-        }
+        
         try {
             conexion.close();
             System.out.println("Cerrar conexion con " + server + " ... OK");
