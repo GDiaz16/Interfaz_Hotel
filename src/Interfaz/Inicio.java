@@ -1,26 +1,18 @@
 package Interfaz;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Label;
 import java.net.URL;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JList;
 
 public class Inicio extends javax.swing.JPanel {
 
-    //public JComboBox cajaUsuarios;
     private URL url = getClass().getResource("/Imagenes/fondo_inicio.jpg");
     Image image = new ImageIcon(url).getImage();
 
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        
         setOpaque(false);
         super.paint(g);
     }
@@ -28,25 +20,45 @@ public class Inicio extends javax.swing.JPanel {
     public Inicio() {
         initComponents();
         anotherComponents();
-
     }
-
+    
+    public void userSelected(String user){
+        switch (user){
+            case "Recepcionista":
+                this.setVisible(false);
+                this.getTopLevelAncestor().add(new panelRecepcionista());
+            break;
+            case "Gerente":
+                System.out.println("gere");
+            break;
+            case "Personal de aseo":
+                System.out.println("pa");
+            break;
+            case "Personal de Mantenimiento":
+                System.out.println("pm");
+            break;
+            case "Administrador Zona Comun":
+                System.out.println("azc");
+            break;
+                   
+                    
+        }
+    }
     public void anotherComponents() {
-        String[] usuarios = {"Gerente", "Recepcionista", "Personal de aseo", "Personal de Mantenimiento", "Personal de Aseo", "Administrador Zona Comun",};
-        jComboBox1.setModel(new DefaultComboBoxModel(usuarios));
-        jComboBox1.setLocation(600, 500);
-        jComboBox1.setVisible(true);
+        String[] usuarios = {"Gerente", "Recepcionista", "Personal de Mantenimiento", "Personal de Aseo", "Administrador Zona Comun",};
+        listaUsuarios.setModel(new DefaultComboBoxModel(usuarios));
+        listaUsuarios.setLocation(600, 500);
+        listaUsuarios.setVisible(true);
 
-        this.add(jComboBox1);
-        //cajaUsuarios.
-        //cajaUsuarios.setVisible(true);
+        this.add(listaUsuarios);
+
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        listaUsuarios = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
@@ -54,12 +66,17 @@ public class Inicio extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jComboBox1.setBackground(new java.awt.Color(208, 217, 127));
-        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setAlignmentX(600.0F);
-        jComboBox1.setAlignmentY(2000.0F);
-        jComboBox1.setBorder(null);
+        listaUsuarios.setBackground(new java.awt.Color(208, 217, 127));
+        listaUsuarios.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        listaUsuarios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaUsuarios.setAlignmentX(600.0F);
+        listaUsuarios.setAlignmentY(2000.0F);
+        listaUsuarios.setBorder(null);
+        listaUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaUsuariosActionPerformed(evt);
+            }
+        });
 
         jLabel1.setBackground(new java.awt.Color(240, 216, 127));
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
@@ -93,7 +110,7 @@ public class Inicio extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPasswordField1)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(listaUsuarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(173, 173, 173)
@@ -108,7 +125,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(listaUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,12 +134,16 @@ public class Inicio extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void listaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaUsuariosActionPerformed
+        userSelected((String) listaUsuarios.getModel().getSelectedItem());
+    }//GEN-LAST:event_listaUsuariosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JComboBox<String> listaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
