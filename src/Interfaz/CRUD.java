@@ -12,19 +12,28 @@ public class CRUD {
 
     private static Connection conexion;
     private static String bd = "hotel";
-     private static String host = "localhost";
+    private static String host = "localhost";
     private static String server = "jdbc:mysql://" + host + "/" + bd;
 
-    public void call() {
+    public void insertarHuesped(long documento, String nombre, String apellido,
+            long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
         try {
-            //esta variable es para colocar el parametro del metodo que se esta llamando
-            String parameter = "";
-            // Llamar procedimientos almacenados
-            PreparedStatement parametro = conexion.prepareStatement(
-                    "CALL aumento(?);");
-            parametro.setString(1, parameter);
+            PreparedStatement parametro;
+            if (huesped == 0) {
+                parametro = conexion.prepareStatement("CALL agregar_huesped_responsable(?,?,?,?,?,?);");
+                parametro.setString(6, modoPago);
+            } else {
+                parametro = conexion.prepareStatement("CALL agregar_huesped_acompañante(?,?,?,?,?,?);");
+                parametro.setString(6, idResponsable + "");
+            }
+            parametro.setString(1, documento + "");
+            parametro.setString(2, nombre);
+            parametro.setString(3, apellido);
+            parametro.setString(4, telefono + "");
+            parametro.setString(5, fechaNacimiento);
 
             int retorno = parametro.executeUpdate();
+            System.out.println("retorno " + retorno);
 
         } catch (SQLException ex) {
             System.out.println("Imposible realizar llamada ... FAIL");
@@ -65,7 +74,7 @@ public class CRUD {
     public void update() {
         //realizar update
         int idObra = 0;
-        int costoObra = 0 ;
+        int costoObra = 0;
         try {
             // Preparamos la actualización del registro con id = 5
             PreparedStatement actualizar = conexion.prepareStatement(
@@ -108,19 +117,22 @@ public class CRUD {
         }
     }
 
-    public void principal(String user, String password) {
+    public void conexionUsuario(String user, String password) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
-            JOptionPane.showMessageDialog(null,"Conexión a base de datos " + bd + " ... OK", "Informaccion Conexion",1);
-           
+            JOptionPane.showMessageDialog(null, "Conexión a base de datos " + bd + " ... OK", "Informacion Conexion", 1);
+
         } catch (ClassNotFoundException ex) {
             System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
         } catch (SQLException ex) {
             System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
         }
-        
+
+    }
+
+    public void cerrarConexion() {
         try {
             conexion.close();
             System.out.println("Cerrar conexion con " + server + " ... OK");
@@ -128,5 +140,4 @@ public class CRUD {
             System.out.println("Imposible cerrar conexion ... FAIL");
         }
     }
-
 }
