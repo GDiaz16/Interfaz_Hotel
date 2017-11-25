@@ -171,7 +171,7 @@ public class Inicio extends javax.swing.JPanel {
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
 
         userSelected((String) listaUsuarios.getModel().getSelectedItem());
-        cn.principal(user, password);
+        cn.conexionUsuario(user, password);
 
     }//GEN-LAST:event_botonIngresarActionPerformed
 

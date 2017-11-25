@@ -14,19 +14,21 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private Image image = new ImageIcon(url).getImage();
     private String nombreHuesped;
     private String apellidoHuesped;
-    private int documentoHuesped;
-    private int telefonoHuesped;
+    private long documentoHuesped;
+    private long telefonoHuesped;
     private String fechaNacHuesped;
     private String modoPagoHuesped;
     private String placaHuesped;
-    
+
     private String nombreAcompanante;
     private String apellidoAcompanante;
-    private int documentoAcompanante;
-    private int telefonoAcompanante;
+    private long documentoAcompanante;
+    private long telefonoAcompanante;
     private String fechaNacAcompanante;
     
+    private CRUD cn = new CRUD();
     JPopupMenu error = new JPopupMenu("Hola mundo");
+
     public panelRecepcionista() {
         initComponents();
     }
@@ -59,7 +61,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         apellidoAcompananteText = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         documentoCliente = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botonGuardarResponsable = new javax.swing.JButton();
         telefonoCliente = new javax.swing.JTextField();
         fechaNacCliente = new javax.swing.JTextField();
         modoPagoCliente = new javax.swing.JTextField();
@@ -77,6 +79,8 @@ public class panelRecepcionista extends javax.swing.JPanel {
         placaCliente = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         nuevoAcompanante = new javax.swing.JButton();
+        botonGuardarAuto = new javax.swing.JButton();
+        botonGuardarResponsable1 = new javax.swing.JButton();
 
         error1.setToolTipText("12335");
         error1.setInvoker(fechaNacCliente);
@@ -233,11 +237,11 @@ public class panelRecepcionista extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardarResponsable.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonGuardarResponsable.setText("Guardar");
+        botonGuardarResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonGuardarResponsableActionPerformed(evt);
             }
         });
 
@@ -322,7 +326,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                         .addComponent(apellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
                         .addComponent(jLabel1)
-                        .addComponent(jButton1))
+                        .addComponent(botonGuardarResponsable))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
@@ -357,7 +361,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(modoPagoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(20, 20, 20)
-                    .addComponent(jButton1)
+                    .addComponent(botonGuardarResponsable)
                     .addContainerGap(23, Short.MAX_VALUE)))
         );
 
@@ -377,9 +381,19 @@ public class panelRecepcionista extends javax.swing.JPanel {
 
         nuevoAcompanante.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         nuevoAcompanante.setText("Registrar Huesped Acompañante");
+        nuevoAcompanante.setEnabled(false);
         nuevoAcompanante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevoAcompananteActionPerformed(evt);
+            }
+        });
+
+        botonGuardarAuto.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        botonGuardarAuto.setText("Guardar");
+        botonGuardarAuto.setEnabled(false);
+        botonGuardarAuto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarAutoActionPerformed(evt);
             }
         });
 
@@ -390,10 +404,13 @@ public class panelRecepcionista extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addComponent(placaCliente))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(placaCliente))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonGuardarAuto))
                     .addComponent(nuevoAcompanante))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -405,11 +422,21 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addGap(0, 0, 0)
-                .addComponent(placaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(placaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonGuardarAuto))
                 .addGap(18, 18, 18)
                 .addComponent(nuevoAcompanante)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        botonGuardarResponsable1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonGuardarResponsable1.setText("Cerrar sesión");
+        botonGuardarResponsable1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarResponsable1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -421,22 +448,30 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addGap(76, 76, 76)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(221, 221, 221))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(322, 322, 322)
+                .addComponent(botonGuardarResponsable1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonGuardarResponsable1)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println(nombreHuesped);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonGuardarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsableActionPerformed
+        cn.insertarHuesped(documentoHuesped, nombreHuesped, apellidoHuesped, telefonoHuesped, 
+                fechaNacHuesped, modoPagoHuesped, 0, 0);
+        botonGuardarAuto.setEnabled(true);
+        nuevoAcompanante.setEnabled(true);
+    }//GEN-LAST:event_botonGuardarResponsableActionPerformed
 
     private void nombreClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreClienteKeyReleased
         nombreHuesped = nombreCliente.getText();
@@ -447,23 +482,23 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_apellidoClienteKeyReleased
 
     private void documentoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoClienteKeyReleased
-        documentoHuesped = Integer.parseInt(documentoCliente.getText());
+        documentoHuesped = Long.parseLong(documentoCliente.getText());
     }//GEN-LAST:event_documentoClienteKeyReleased
 
     private void telefonoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoClienteKeyReleased
-        telefonoHuesped = Integer.parseInt(telefonoCliente.getText());
+        telefonoHuesped = Long.parseLong(telefonoCliente.getText());
     }//GEN-LAST:event_telefonoClienteKeyReleased
 
     private void fechaNacClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacClienteKeyReleased
         fechaNacHuesped = fechaNacCliente.getText();
-        
+
         if (fechaNacHuesped.length() >= 10) {
             System.out.println(fechaNacHuesped.substring(0, 4));
             System.out.println(fechaNacHuesped.substring(4, 5));
             System.out.println(fechaNacHuesped.substring(5, 7));
             System.out.println(fechaNacHuesped.substring(7, 8));
             System.out.println(fechaNacHuesped.substring(8, 10));
-    
+
         }
 
     }//GEN-LAST:event_fechaNacClienteKeyReleased
@@ -483,27 +518,28 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_nuevoAcompananteActionPerformed
 
     private void documentoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoAcompananteTextKeyReleased
-        documentoAcompanante = Integer.parseInt(documentoAcompananteText.getText());
+        documentoAcompanante = Long.parseLong(documentoAcompananteText.getText());
     }//GEN-LAST:event_documentoAcompananteTextKeyReleased
 
     private void buttonAcompananteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcompananteActionPerformed
-        // TODO add your handling code here:
+        cn.insertarHuesped(documentoAcompanante, nombreAcompanante, apellidoAcompanante,
+                telefonoAcompanante, fechaNacAcompanante, "", documentoHuesped, 1);
     }//GEN-LAST:event_buttonAcompananteActionPerformed
 
     private void telefonoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoAcompananteTextKeyReleased
-      telefonoAcompanante = Integer.parseInt(telefonoAcompananteText.getText());
+        telefonoAcompanante = Long.parseLong(telefonoAcompananteText.getText());
     }//GEN-LAST:event_telefonoAcompananteTextKeyReleased
 
     private void fechaNacAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacAcompananteTextKeyReleased
-             fechaNacAcompanante = fechaNacAcompananteText.getText();
-        
+        fechaNacAcompanante = fechaNacAcompananteText.getText();
+
         if (fechaNacAcompanante.length() >= 10) {
             System.out.println(fechaNacAcompanante.substring(0, 4));
             System.out.println(fechaNacAcompanante.substring(4, 5));
             System.out.println(fechaNacAcompanante.substring(5, 7));
             System.out.println(fechaNacAcompanante.substring(7, 8));
             System.out.println(fechaNacAcompanante.substring(8, 10));
-    
+
         }
     }//GEN-LAST:event_fechaNacAcompananteTextKeyReleased
 
@@ -515,17 +551,27 @@ public class panelRecepcionista extends javax.swing.JPanel {
         apellidoAcompanante = apellidoAcompananteText.getText();
     }//GEN-LAST:event_apellidoAcompananteTextKeyReleased
 
+    private void botonGuardarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarAutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonGuardarAutoActionPerformed
+
+    private void botonGuardarResponsable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsable1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonGuardarResponsable1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoAcompananteText;
     private javax.swing.JTextField apellidoCliente;
+    private javax.swing.JButton botonGuardarAuto;
+    private javax.swing.JButton botonGuardarResponsable;
+    private javax.swing.JButton botonGuardarResponsable1;
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JTextField documentoAcompananteText;
     private javax.swing.JTextField documentoCliente;
     private javax.swing.JPopupMenu error1;
     private javax.swing.JTextField fechaNacAcompananteText;
     private javax.swing.JTextField fechaNacCliente;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
