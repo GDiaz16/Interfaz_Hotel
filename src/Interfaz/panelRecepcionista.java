@@ -45,8 +45,8 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }
 
     public void cargarHuespedes() {
-        for (int i = 0; i < 15; i++) {
-            huespedes.add(new huesped("Gonzalo", "Diaz", 3134340058L, 1013681625L));
+        for (int i = 0; i < cn.IDs.size(); i++) {
+            huespedes.add(new huesped(cn.nombres.get(i), cn.apellidos.get(i), cn.telefonos.get(i), cn.IDs.get(i)));
             System.out.println("panel " + i);
         }
         for (huesped huesped : huespedes) {
@@ -700,6 +700,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private void buttonResumenHuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResumenHuespedesActionPerformed
         jDialogResHuespedes.setLocationRelativeTo(this);
         jDialogResHuespedes.setVisible(true);
+        cn.consultaHuespedes();
         cargarHuespedes();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
 

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class CRUD {
@@ -17,6 +18,10 @@ public class CRUD {
     public int retorno;
     public int conect;
     public int estado;
+    public ArrayList<Long> IDs = new ArrayList<>();
+    public ArrayList<String> apellidos = new ArrayList<>();
+    public ArrayList<String> nombres = new ArrayList<>();
+    public ArrayList<Long> telefonos = new ArrayList<>();
 
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
@@ -116,28 +121,17 @@ public class CRUD {
         }
     }
 
-    public void consulta() {
-        String tabla = "";
+    public void consultaHuespedes() {
         try {
-            // Preparamos la consulta
             Statement s = conexion.createStatement();
-            ResultSet rs = s.executeQuery("select * from " + tabla + ";");
-            // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla            .
-            if (tabla.equals("museo")) {
-                System.out.println("ID" + "\t nombre museo");
-            } else if (tabla.equals("obra")) {
-                System.out.println("ID" + "\tobr_nombre" + "\t\t\tobr_tipo");
-            }
-
+            ResultSet rs = s.executeQuery("select * from huespedes_hotel;");
             while (rs.next()) {
-                if (tabla.equals("museo")) {
-                    System.out.println(rs.getInt(1) + "\t" + rs.getString(2));
-
-                } else if (tabla.equals("obra")) {
-                    System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t\t\t" + rs.getString("Tipo_obra"));
-                } else {
-                    System.out.println("La tabla no existe");
-                }
+                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(3) + "\t\t" + rs.getLong(4));
+                IDs.add(rs.getLong(1));
+                nombres.add(rs.getString(2));
+                apellidos.add(rs.getString(3));
+                telefonos.add(rs.getLong(4));
+                
             }
         } catch (SQLException ex) {
             System.out.println("Imposible realizar consulta ... FAIL");
