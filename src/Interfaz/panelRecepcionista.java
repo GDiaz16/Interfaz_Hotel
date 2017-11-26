@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.Popup;
 
 public class panelRecepcionista extends javax.swing.JPanel {
@@ -26,6 +28,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private long documentoAcompanante;
     private long telefonoAcompanante;
     private String fechaNacAcompanante;
+    ArrayList<huesped> huespedes = new ArrayList<>();
 
     private CRUD cn = new CRUD();
     JPopupMenu error = new JPopupMenu("Hola mundo");
@@ -39,6 +42,17 @@ public class panelRecepcionista extends javax.swing.JPanel {
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
         super.paint(g);
+    }
+
+    public void cargarHuespedes() {
+        for (int i = 0; i < cn.IDs.size(); i++) {
+            huespedes.add(new huesped(cn.nombres.get(i), cn.apellidos.get(i), cn.telefonos.get(i), cn.IDs.get(i)));
+            System.out.println("panel " + i);
+        }
+        for (huesped huesped : huespedes) {
+            huesped.setVisible(true);
+            jPanel5.add(huesped);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -60,6 +74,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
         nombreAcompananteText = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         apellidoAcompananteText = new javax.swing.JTextField();
+        jDialogResHuespedes = new javax.swing.JDialog();
+        jLabel18 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel5 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         documentoCliente = new javax.swing.JTextField();
         botonGuardarResponsable = new javax.swing.JButton();
@@ -84,9 +102,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
         botonCerrarSesion = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
-        placaCliente1 = new javax.swing.JTextField();
+        habEspecificaText = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        buttonHabEspecifica = new javax.swing.JButton();
+        buttonResumenHuespedes = new javax.swing.JButton();
 
         error1.setToolTipText("12335");
         error1.setInvoker(fechaNacCliente);
@@ -233,6 +252,38 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+        );
+
+        jDialogResHuespedes.setTitle("Huespes registrados en el hotel");
+        jDialogResHuespedes.setMinimumSize(new java.awt.Dimension(420, 490));
+        jDialogResHuespedes.setResizable(false);
+
+        jLabel18.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        jLabel18.setText("Huespedes actuales");
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setOpaque(false);
+
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(jPanel5);
+
+        javax.swing.GroupLayout jDialogResHuespedesLayout = new javax.swing.GroupLayout(jDialogResHuespedes.getContentPane());
+        jDialogResHuespedes.getContentPane().setLayout(jDialogResHuespedesLayout);
+        jDialogResHuespedesLayout.setHorizontalGroup(
+            jDialogResHuespedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogResHuespedesLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jLabel18)
+                .addContainerGap(185, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+        jDialogResHuespedesLayout.setVerticalGroup(
+            jDialogResHuespedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogResHuespedesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1))
         );
 
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -448,9 +499,9 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setText("Consultas");
 
-        placaCliente1.addKeyListener(new java.awt.event.KeyAdapter() {
+        habEspecificaText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                placaCliente1KeyReleased(evt);
+                habEspecificaTextKeyReleased(evt);
             }
         });
 
@@ -458,8 +509,16 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Habitacion especifica");
 
-        jButton1.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
-        jButton1.setText("Buscar");
+        buttonHabEspecifica.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        buttonHabEspecifica.setText("Buscar");
+
+        buttonResumenHuespedes.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        buttonResumenHuespedes.setText("Listado de huespedes actuales");
+        buttonResumenHuespedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResumenHuespedesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -475,10 +534,13 @@ public class panelRecepcionista extends javax.swing.JPanel {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel17)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(placaCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(habEspecificaText, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(buttonHabEspecifica)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(buttonResumenHuespedes)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -489,9 +551,11 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addComponent(jLabel17)
                 .addGap(0, 0, 0)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(placaCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(98, Short.MAX_VALUE))
+                    .addComponent(habEspecificaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonHabEspecifica))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(buttonResumenHuespedes)
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -533,10 +597,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
         if (cn.retorno == 1) {
             botonGuardarAuto.setEnabled(true);
             nuevoAcompanante.setEnabled(true);
-             JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD", 
+            JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD",
                     JOptionPane.INFORMATION_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, "Se debe llenar por completo el registro", "Mensaje de la BD", 
+        } else {
+            JOptionPane.showMessageDialog(null, "Se debe llenar por completo el registro", "Mensaje de la BD",
                     JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonGuardarResponsableActionPerformed
@@ -629,9 +693,18 @@ public class panelRecepcionista extends javax.swing.JPanel {
         this.getTopLevelAncestor().add(new Inicio());
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
-    private void placaCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_placaCliente1KeyReleased
+    private void habEspecificaTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_habEspecificaTextKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_placaCliente1KeyReleased
+    }//GEN-LAST:event_habEspecificaTextKeyReleased
+
+    private void buttonResumenHuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResumenHuespedesActionPerformed
+        jDialogResHuespedes.setLocationRelativeTo(this);
+        jDialogResHuespedes.setVisible(true);
+        cn.consultaHuespedes();
+        cargarHuespedes();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
+
+    }//GEN-LAST:event_buttonResumenHuespedesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -641,12 +714,15 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JButton botonGuardarAuto;
     private javax.swing.JButton botonGuardarResponsable;
     private javax.swing.JButton buttonAcompanante;
+    private javax.swing.JButton buttonHabEspecifica;
+    private javax.swing.JButton buttonResumenHuespedes;
     private javax.swing.JTextField documentoAcompananteText;
     private javax.swing.JTextField documentoCliente;
     private javax.swing.JPopupMenu error1;
     private javax.swing.JTextField fechaNacAcompananteText;
     private javax.swing.JTextField fechaNacCliente;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField habEspecificaText;
+    private javax.swing.JDialog jDialogResHuespedes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -656,6 +732,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -668,12 +745,13 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField modoPagoCliente;
     private javax.swing.JTextField nombreAcompananteText;
     private javax.swing.JTextField nombreCliente;
     private javax.swing.JButton nuevoAcompanante;
     private javax.swing.JTextField placaCliente;
-    private javax.swing.JTextField placaCliente1;
     private javax.swing.JTextField telefonoAcompananteText;
     private javax.swing.JTextField telefonoCliente;
     private javax.swing.JDialog ventanaHuesped;
