@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.Popup;
 
@@ -25,7 +26,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private long documentoAcompanante;
     private long telefonoAcompanante;
     private String fechaNacAcompanante;
-    
+
     private CRUD cn = new CRUD();
     JPopupMenu error = new JPopupMenu("Hola mundo");
 
@@ -80,7 +81,12 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         nuevoAcompanante = new javax.swing.JButton();
         botonGuardarAuto = new javax.swing.JButton();
-        botonGuardarResponsable1 = new javax.swing.JButton();
+        botonCerrarSesion = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        placaCliente1 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         error1.setToolTipText("12335");
         error1.setInvoker(fechaNacCliente);
@@ -430,13 +436,63 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        botonGuardarResponsable1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        botonGuardarResponsable1.setText("Cerrar sesión");
-        botonGuardarResponsable1.addActionListener(new java.awt.event.ActionListener() {
+        botonCerrarSesion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonCerrarSesion.setText("Cerrar sesión");
+        botonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarResponsable1ActionPerformed(evt);
+                botonCerrarSesionActionPerformed(evt);
             }
         });
+
+        jLabel16.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel16.setText("Consultas");
+
+        placaCliente1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                placaCliente1KeyReleased(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel17.setText("Habitacion especifica");
+
+        jButton1.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        jButton1.setText("Buscar");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(185, 185, 185))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(placaCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel17)
+                .addGap(0, 0, 0)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(placaCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -446,11 +502,13 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addGap(72, 72, 72)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(76, 76, 76)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(221, 221, 221))
             .addGroup(layout.createSequentialGroup()
                 .addGap(322, 322, 322)
-                .addComponent(botonGuardarResponsable1)
+                .addComponent(botonCerrarSesion)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -459,18 +517,28 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonGuardarResponsable1)
+                .addComponent(botonCerrarSesion)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsableActionPerformed
-        cn.insertarHuesped(documentoHuesped, nombreHuesped, apellidoHuesped, telefonoHuesped, 
+        cn.insertarHuesped(documentoHuesped, nombreHuesped, apellidoHuesped, telefonoHuesped,
                 fechaNacHuesped, modoPagoHuesped, 0, 0);
-        botonGuardarAuto.setEnabled(true);
-        nuevoAcompanante.setEnabled(true);
+        if (cn.retorno == 1) {
+            botonGuardarAuto.setEnabled(true);
+            nuevoAcompanante.setEnabled(true);
+             JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD", 
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Se debe llenar por completo el registro", "Mensaje de la BD", 
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_botonGuardarResponsableActionPerformed
 
     private void nombreClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nombreClienteKeyReleased
@@ -552,26 +620,33 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_apellidoAcompananteTextKeyReleased
 
     private void botonGuardarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarAutoActionPerformed
-        // TODO add your handling code here:
+        cn.insertarAuto(placaHuesped, documentoHuesped);
     }//GEN-LAST:event_botonGuardarAutoActionPerformed
 
-    private void botonGuardarResponsable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsable1ActionPerformed
+    private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
+        cn.cerrarConexion();
+        this.setVisible(false);
+        this.getTopLevelAncestor().add(new Inicio());
+    }//GEN-LAST:event_botonCerrarSesionActionPerformed
+
+    private void placaCliente1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_placaCliente1KeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonGuardarResponsable1ActionPerformed
+    }//GEN-LAST:event_placaCliente1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoAcompananteText;
     private javax.swing.JTextField apellidoCliente;
+    private javax.swing.JButton botonCerrarSesion;
     private javax.swing.JButton botonGuardarAuto;
     private javax.swing.JButton botonGuardarResponsable;
-    private javax.swing.JButton botonGuardarResponsable1;
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JTextField documentoAcompananteText;
     private javax.swing.JTextField documentoCliente;
     private javax.swing.JPopupMenu error1;
     private javax.swing.JTextField fechaNacAcompananteText;
     private javax.swing.JTextField fechaNacCliente;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -579,6 +654,8 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -590,11 +667,13 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField modoPagoCliente;
     private javax.swing.JTextField nombreAcompananteText;
     private javax.swing.JTextField nombreCliente;
     private javax.swing.JButton nuevoAcompanante;
     private javax.swing.JTextField placaCliente;
+    private javax.swing.JTextField placaCliente1;
     private javax.swing.JTextField telefonoAcompananteText;
     private javax.swing.JTextField telefonoCliente;
     private javax.swing.JDialog ventanaHuesped;

@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.net.URL;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Inicio extends javax.swing.JPanel {
 
@@ -28,9 +29,16 @@ public class Inicio extends javax.swing.JPanel {
     public void userSelected(String user) {
         switch (user) {
             case "Recepcionista":
-                this.setVisible(false);
-                this.getTopLevelAncestor().add(new panelRecepcionista());
                 this.user = "recepcionista";
+                cn.conexionUsuario(this.user, password);
+                System.out.println("conect " + cn.conect);
+                if (cn.conect == 1) {
+                    this.setVisible(false);
+                    this.getTopLevelAncestor().add(new panelRecepcionista());
+                } else if (cn.conect == 0) {
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta", "Mensaje de la BD",
+                            JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             case "Gerente":
                 this.user = "gerente";
@@ -72,7 +80,7 @@ public class Inicio extends javax.swing.JPanel {
         listaUsuarios = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        passwordText = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         botonIngresar = new javax.swing.JButton();
 
@@ -104,10 +112,10 @@ public class Inicio extends javax.swing.JPanel {
         jLabel2.setText("CONTRASEÑA");
         jLabel2.setToolTipText("");
 
-        jPasswordField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+        passwordText.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        passwordText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jPasswordField1KeyReleased(evt);
+                passwordTextKeyReleased(evt);
             }
         });
 
@@ -133,7 +141,7 @@ public class Inicio extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(271, 271, 271)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1)
+                            .addComponent(passwordText)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(listaUsuarios, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
@@ -157,7 +165,7 @@ public class Inicio extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(botonIngresar)
                 .addContainerGap(131, Short.MAX_VALUE))
@@ -169,16 +177,13 @@ public class Inicio extends javax.swing.JPanel {
     }//GEN-LAST:event_listaUsuariosActionPerformed
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
-
         userSelected((String) listaUsuarios.getModel().getSelectedItem());
-        cn.conexionUsuario(user, password);
-
     }//GEN-LAST:event_botonIngresarActionPerformed
 
-    private void jPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyReleased
-        password = (String) jPasswordField1.getText();
+    private void passwordTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTextKeyReleased
+        password = (String) passwordText.getText();
         System.out.println(password);
-    }//GEN-LAST:event_jPasswordField1KeyReleased
+    }//GEN-LAST:event_passwordTextKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,7 +191,7 @@ public class Inicio extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JComboBox<String> listaUsuarios;
+    private javax.swing.JPasswordField passwordText;
     // End of variables declaration//GEN-END:variables
 }
