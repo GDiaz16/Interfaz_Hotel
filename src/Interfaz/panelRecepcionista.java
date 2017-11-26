@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.Popup;
 
 public class panelRecepcionista extends javax.swing.JPanel {
 
@@ -29,6 +27,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private long telefonoAcompanante;
     private String fechaNacAcompanante;
     ArrayList<huesped> huespedes = new ArrayList<>();
+    private int habitacion;
 
     private CRUD cn = new CRUD();
     JPopupMenu error = new JPopupMenu("Hola mundo");
@@ -106,6 +105,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         buttonHabEspecifica = new javax.swing.JButton();
         buttonResumenHuespedes = new javax.swing.JButton();
+        dispHabitacionLabel = new javax.swing.JLabel();
 
         error1.setToolTipText("12335");
         error1.setInvoker(fechaNacCliente);
@@ -511,6 +511,11 @@ public class panelRecepcionista extends javax.swing.JPanel {
 
         buttonHabEspecifica.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
         buttonHabEspecifica.setText("Buscar");
+        buttonHabEspecifica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonHabEspecificaActionPerformed(evt);
+            }
+        });
 
         buttonResumenHuespedes.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
         buttonResumenHuespedes.setText("Listado de huespedes actuales");
@@ -519,6 +524,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 buttonResumenHuespedesActionPerformed(evt);
             }
         });
+
+        dispHabitacionLabel.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        dispHabitacionLabel.setForeground(new java.awt.Color(51, 51, 51));
+        dispHabitacionLabel.setText("--");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -539,7 +548,9 @@ public class panelRecepcionista extends javax.swing.JPanel {
                                 .addComponent(buttonHabEspecifica)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(buttonResumenHuespedes)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buttonResumenHuespedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dispHabitacionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -553,9 +564,11 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(habEspecificaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonHabEspecifica))
+                .addGap(2, 2, 2)
+                .addComponent(dispHabitacionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonResumenHuespedes)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -614,11 +627,21 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_apellidoClienteKeyReleased
 
     private void documentoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoClienteKeyReleased
-        documentoHuesped = Long.parseLong(documentoCliente.getText());
+        try {
+            documentoHuesped = Long.parseLong(documentoCliente.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_documentoClienteKeyReleased
 
     private void telefonoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoClienteKeyReleased
-        telefonoHuesped = Long.parseLong(telefonoCliente.getText());
+        try {
+            telefonoHuesped = Long.parseLong(telefonoCliente.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_telefonoClienteKeyReleased
 
     private void fechaNacClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacClienteKeyReleased
@@ -650,7 +673,12 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_nuevoAcompananteActionPerformed
 
     private void documentoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoAcompananteTextKeyReleased
-        documentoAcompanante = Long.parseLong(documentoAcompananteText.getText());
+        try {
+            documentoAcompanante = Long.parseLong(documentoAcompananteText.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_documentoAcompananteTextKeyReleased
 
     private void buttonAcompananteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcompananteActionPerformed
@@ -659,7 +687,12 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonAcompananteActionPerformed
 
     private void telefonoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoAcompananteTextKeyReleased
-        telefonoAcompanante = Long.parseLong(telefonoAcompananteText.getText());
+        try {
+            telefonoAcompanante = Long.parseLong(telefonoAcompananteText.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_telefonoAcompananteTextKeyReleased
 
     private void fechaNacAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacAcompananteTextKeyReleased
@@ -693,10 +726,6 @@ public class panelRecepcionista extends javax.swing.JPanel {
         this.getTopLevelAncestor().add(new Inicio());
     }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
-    private void habEspecificaTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_habEspecificaTextKeyReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_habEspecificaTextKeyReleased
-
     private void buttonResumenHuespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResumenHuespedesActionPerformed
         jDialogResHuespedes.setLocationRelativeTo(this);
         jDialogResHuespedes.setVisible(true);
@@ -705,6 +734,25 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
 
     }//GEN-LAST:event_buttonResumenHuespedesActionPerformed
+
+    private void buttonHabEspecificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHabEspecificaActionPerformed
+        dispHabitacionLabel.setText(cn.habFavorita(habitacion));
+        if (cn.habFavorita(habitacion).equalsIgnoreCase("Disponible")) {
+            dispHabitacionLabel.setForeground(Color.GREEN.darker());
+        } else if (cn.habFavorita(habitacion).equalsIgnoreCase("No disponible")) {
+            dispHabitacionLabel.setForeground(Color.red);
+        }else {
+            dispHabitacionLabel.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_buttonHabEspecificaActionPerformed
+
+    private void habEspecificaTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_habEspecificaTextKeyReleased
+        try {
+            habitacion = Integer.parseInt(habEspecificaText.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_habEspecificaTextKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -716,6 +764,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JButton buttonHabEspecifica;
     private javax.swing.JButton buttonResumenHuespedes;
+    private javax.swing.JLabel dispHabitacionLabel;
     private javax.swing.JTextField documentoAcompananteText;
     private javax.swing.JTextField documentoCliente;
     private javax.swing.JPopupMenu error1;

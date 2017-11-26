@@ -1,13 +1,12 @@
-
 package Interfaz;
 
 public class huesped extends javax.swing.JPanel {
 
     public huesped(String nombre, String apellido, long telefono, long id) {
         initComponents();
-        nombreApellidoLabel.setText(nombre+" "+apellido);
-        telefonoLabel.setText(telefono+"");
-        docIDLabel.setText(id+"");
+        nombreApellidoLabel.setText(nombre + " " + apellido);
+        telefonoLabel.setText(telefono + "");
+        docIDLabel.setText(id + "");
     }
 
     @SuppressWarnings("unchecked")

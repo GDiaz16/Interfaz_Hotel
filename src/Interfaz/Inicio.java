@@ -173,7 +173,7 @@ public class Inicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaUsuariosActionPerformed
-        //userSelected((String) listaUsuarios.getModel().getSelectedItem());
+       
     }//GEN-LAST:event_listaUsuariosActionPerformed
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIngresarActionPerformed
