@@ -14,9 +14,13 @@ public class CRUD {
     private static String bd = "hotel";
     private static String host = "localhost";
     private static String server = "jdbc:mysql://" + host + "/" + bd;
+    public int retorno;
+    public int conect;
+    public int estado;
 
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
+        System.out.println("retorno inicio");
         try {
             PreparedStatement parametro;
             if (huesped == 0) {
@@ -31,11 +35,34 @@ public class CRUD {
             parametro.setString(3, apellido);
             parametro.setString(4, telefono + "");
             parametro.setString(5, fechaNacimiento);
-
-            int retorno = parametro.executeUpdate();
-            System.out.println("retorno " + retorno);
+            retorno = 1;
+            parametro.executeUpdate();
+//            parametro.
+//                   System.out.println("estado"+parametro.executeUpdate());
+//            System.out.println("retorno try" + retorno);
 
         } catch (SQLException ex) {
+            System.out.println("Imposible realizar llamada ... FAIL");
+            retorno = 0;
+        }
+    }
+
+    public void insertarAuto(String placa, long idHuesped) {
+        try {
+
+            System.out.println("estado " + estado);
+            PreparedStatement parametro;
+            parametro = conexion.prepareStatement("call agregar_automovil(?,?);");
+            parametro.setString(1, placa);
+            parametro.setString(2, idHuesped + "");
+            parametro.executeUpdate();
+            estado = 1;
+            JOptionPane.showMessageDialog(null, "Auto Guardado", "Informacion", 1);
+//            System.out.println("estado"+parametro.executeUpdate());
+//            System.out.println("estado " + estado);
+////if(estado = 1)
+        } catch (SQLException ex) {
+            estado = 0;
             System.out.println("Imposible realizar llamada ... FAIL");
         }
     }
@@ -123,11 +150,12 @@ public class CRUD {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = DriverManager.getConnection(server, user, password);
             JOptionPane.showMessageDialog(null, "Conexión a base de datos " + bd + " ... OK", "Informacion Conexion", 1);
-
+            conect = 1;
         } catch (ClassNotFoundException ex) {
             System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
         } catch (SQLException ex) {
             System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
+            conect = 0;
         }
 
     }
