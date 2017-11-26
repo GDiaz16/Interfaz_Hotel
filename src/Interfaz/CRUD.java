@@ -1,5 +1,6 @@
 package Interfaz;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,9 +43,6 @@ public class CRUD {
             parametro.setString(5, fechaNacimiento);
             retorno = 1;
             parametro.executeUpdate();
-//            parametro.
-//                   System.out.println("estado"+parametro.executeUpdate());
-//            System.out.println("retorno try" + retorno);
 
         } catch (SQLException ex) {
             System.out.println("Imposible realizar llamada ... FAIL");
@@ -63,13 +61,31 @@ public class CRUD {
             parametro.executeUpdate();
             estado = 1;
             JOptionPane.showMessageDialog(null, "Auto Guardado", "Informacion", 1);
-//            System.out.println("estado"+parametro.executeUpdate());
-//            System.out.println("estado " + estado);
-////if(estado = 1)
         } catch (SQLException ex) {
             estado = 0;
             System.out.println("Imposible realizar llamada ... FAIL");
         }
+    }
+
+    public String habFavorita(int id) {
+        String retorno;
+        try {
+
+            CallableStatement parametro = conexion.prepareCall("select disp_habitacion(?);");
+            parametro.setString(1, id + "");
+            parametro.execute();
+            ResultSet rs = parametro.getResultSet();
+            if (rs.next()) {
+                retorno = rs.getString(1);
+                System.out.println("retorno " + retorno);
+            } else {
+                retorno = "No existe la habitacion";
+            }
+
+        } catch (SQLException ex) {
+            retorno = "No existe la habitacion";
+        }
+        return retorno;
     }
 
     public void delete() {
@@ -131,7 +147,7 @@ public class CRUD {
                 nombres.add(rs.getString(2));
                 apellidos.add(rs.getString(3));
                 telefonos.add(rs.getLong(4));
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("Imposible realizar consulta ... FAIL");
