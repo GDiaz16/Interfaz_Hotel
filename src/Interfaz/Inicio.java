@@ -62,7 +62,7 @@ public class Inicio extends javax.swing.JPanel {
                 System.out.println("conect " + cn.conect);
                 if (cn.conect == 1) {
                     this.setVisible(false);
-                    this.getTopLevelAncestor().add(new NewJPanel());
+                    this.getTopLevelAncestor().add(new jefePersonal());
                 } else if (cn.conect == 0) {
                     JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta", "Mensaje de la BD",
                             JOptionPane.ERROR_MESSAGE);
