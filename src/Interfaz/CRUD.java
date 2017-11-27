@@ -26,7 +26,7 @@ public class CRUD {
 
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
-        System.out.println("retorno inicio");
+
         try {
             PreparedStatement parametro;
             if (huesped == 0) {
@@ -43,9 +43,11 @@ public class CRUD {
             parametro.setString(5, fechaNacimiento);
             retorno = 1;
             parametro.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD",
+                    JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
-            System.out.println("Imposible realizar llamada ... FAIL");
+            JOptionPane.showMessageDialog(null, "Fallo en el procedimiento", "Mensaje", JOptionPane.ERROR_MESSAGE);
             retorno = 0;
         }
     }

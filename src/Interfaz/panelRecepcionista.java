@@ -46,7 +46,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     public void cargarHuespedes() {
         for (int i = 0; i < cn.IDs.size(); i++) {
             huespedes.add(new huesped(cn.nombres.get(i), cn.apellidos.get(i), cn.telefonos.get(i), cn.IDs.get(i)));
-            System.out.println("panel " + i);
+
         }
         for (huesped huesped : huespedes) {
             huesped.setVisible(true);
@@ -610,11 +610,6 @@ public class panelRecepcionista extends javax.swing.JPanel {
         if (cn.retorno == 1) {
             botonGuardarAuto.setEnabled(true);
             nuevoAcompanante.setEnabled(true);
-            JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD",
-                    JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Se debe llenar por completo el registro", "Mensaje de la BD",
-                    JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonGuardarResponsableActionPerformed
 
@@ -646,7 +641,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
 
     private void fechaNacClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacClienteKeyReleased
         fechaNacHuesped = fechaNacCliente.getText();
-
+        
         if (fechaNacHuesped.length() >= 10) {
             System.out.println(fechaNacHuesped.substring(0, 4));
             System.out.println(fechaNacHuesped.substring(4, 5));
@@ -667,9 +662,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_placaClienteKeyReleased
 
     private void nuevoAcompananteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAcompananteActionPerformed
+        System.out.println("Ventana");
         ventanaHuesped.setLocationRelativeTo(this);
         ventanaHuesped.setVisible(true);
-        System.out.println("Ventana");
+
     }//GEN-LAST:event_nuevoAcompananteActionPerformed
 
     private void documentoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoAcompananteTextKeyReleased
@@ -682,6 +678,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     }//GEN-LAST:event_documentoAcompananteTextKeyReleased
 
     private void buttonAcompananteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAcompananteActionPerformed
+        System.out.println("Responsable: " + documentoHuesped);
         cn.insertarHuesped(documentoAcompanante, nombreAcompanante, apellidoAcompanante,
                 telefonoAcompanante, fechaNacAcompanante, "", documentoHuesped, 1);
     }//GEN-LAST:event_buttonAcompananteActionPerformed
@@ -741,7 +738,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
             dispHabitacionLabel.setForeground(Color.GREEN.darker());
         } else if (cn.habFavorita(habitacion).equalsIgnoreCase("No disponible")) {
             dispHabitacionLabel.setForeground(Color.red);
-        }else {
+        } else {
             dispHabitacionLabel.setForeground(Color.black);
         }
     }//GEN-LAST:event_buttonHabEspecificaActionPerformed
