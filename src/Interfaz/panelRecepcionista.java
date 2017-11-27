@@ -290,8 +290,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
         );
 
         jDialogReservacion.setTitle("Reservacion");
-        jDialogReservacion.setMinimumSize(new java.awt.Dimension(380, 460));
+        jDialogReservacion.setMinimumSize(new java.awt.Dimension(620, 500));
         jDialogReservacion.setModal(true);
+        jDialogReservacion.setPreferredSize(new java.awt.Dimension(620, 500));
+        jDialogReservacion.setResizable(false);
 
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
@@ -299,11 +301,11 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jDialogReservacion.getContentPane().setLayout(jDialogReservacionLayout);
         jDialogReservacionLayout.setHorizontalGroup(
             jDialogReservacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
         );
         jDialogReservacionLayout.setVerticalGroup(
             jDialogReservacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
         );
 
         setPreferredSize(new java.awt.Dimension(800, 600));

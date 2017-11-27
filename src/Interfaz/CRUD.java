@@ -28,6 +28,7 @@ public class CRUD {
     public ArrayList<String> cargo = new ArrayList<>();
     public ArrayList<String> emp_contrato = new ArrayList<>();
     public ArrayList<Long> emp_salario = new ArrayList<>();
+
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
 
@@ -55,23 +56,25 @@ public class CRUD {
             retorno = 0;
         }
     }
-  public void consultaEmpleadoActivo() {
+
+    public void consultaEmpleadoActivo() {
         try {
             Statement s = conexion.createStatement();
             ResultSet rs = s.executeQuery("select * from empleado_activo;");
             while (rs.next()) {
-                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(4) + "\t\t" + rs.getString(5)+ "\t\t" + rs.getLong(9));
+                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(4) + "\t\t" + rs.getString(5) + "\t\t" + rs.getLong(9));
                 emp_documento.add(rs.getLong(1));
                 emp_nombres.add(rs.getString(2));
                 cargo.add(rs.getString(4));
                 emp_contrato.add(rs.getString(5));
                 emp_salario.add(rs.getLong(9));
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("Imposible realizar consulta ... FAIL");
         }
     }
+
     public void insertarAuto(String placa, long idHuesped) {
         try {
 
@@ -109,22 +112,47 @@ public class CRUD {
         }
         return retorno;
     }
-    public ArrayList<Integer> habitacionesLibres(){
+
+    public ArrayList<Integer> habitacionesLibres() {
         ArrayList<Integer> habitaciones = new ArrayList<>();
         try {
             Statement s = conexion.createStatement();
-            ResultSet rs = s.executeQuery("select * from hab_desocupadas;");
+            ResultSet rs = s.executeQuery("select hab_numero from hab_desocupadas;");
             while (rs.next()) {
-                System.out.println(rs.getInt(1) );
+                System.out.println(rs.getInt(1));
                 habitaciones.add(rs.getInt(1));
-                               
+
             }
         } catch (SQLException ex) {
-            System.out.println("Imposible realizar consulta ... FAIL");
+            System.out.println("Imposible realizar habitaciones desocupadas ... FAIL");
         }
         return habitaciones;
     }
-    
+
+    public String[] datosHabitacion(int id) {
+        String[] datos = new String[3];
+        String consulta = "select hab_numeroCamas,hab_numeroCuartos,hab_vip FROM hab_desocupadas where hab_numero = ?;";
+        
+        try {
+            CallableStatement parametro = conexion.prepareCall(consulta);
+            parametro.setString(1, id + "");
+            parametro.execute();
+            ResultSet rs = parametro.getResultSet();
+                     
+            while (rs.next()) {
+                System.out.println(rs.getInt(1));
+                datos[0] = rs.getInt(1) + "";
+                datos[1] = rs.getInt(2) + "";
+                datos[2] = rs.getInt(3) + "";
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar datos habitacion ... FAIL");
+        }
+
+        return datos;
+    }
+
     public void delete() {
         //id de lo que se vaya a borrar
         String id = "";

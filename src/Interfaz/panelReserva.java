@@ -23,16 +23,20 @@ public class panelReserva extends javax.swing.JPanel {
     public panelReserva(long idHuesped) {
         documentoHuesped = idHuesped;
         initComponents();
+        anotherComponents();
     }
-public void anotherComponents() {
+
+    public void anotherComponents() {
         Integer[] habitaciones = new Integer[cn.habitacionesLibres().size()];
-        listaHabitaciones.setModel(new DefaultComboBoxModel());
-        listaHabitaciones.setLocation(600, 500);
-        listaHabitaciones.setVisible(true);
-
-        this.add(listaUsuarios);
+        for (int i = 0; i < cn.habitacionesLibres().size(); i++) {
+            habitaciones[i] = cn.habitacionesLibres().get(i);
+        }
+        listaHabitaciones.setModel(new DefaultComboBoxModel(habitaciones));
+//        listaHabitaciones.setLocation(600, 500);
+       listaHabitaciones.setVisible(true);
 
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -63,7 +67,7 @@ public void anotherComponents() {
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botonGuardarReservacion = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         placaCliente = new javax.swing.JTextField();
@@ -275,9 +279,9 @@ public void anotherComponents() {
 
         jTextField6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        jButton1.setText("Guardar reservacion");
+        botonGuardarReservacion.setBackground(new java.awt.Color(204, 204, 204));
+        botonGuardarReservacion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonGuardarReservacion.setText("Guardar reservacion");
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
@@ -321,9 +325,9 @@ public void anotherComponents() {
         listaHabitaciones.setAlignmentX(600.0F);
         listaHabitaciones.setAlignmentY(2000.0F);
         listaHabitaciones.setBorder(null);
-        listaHabitaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaHabitacionesActionPerformed(evt);
+        listaHabitaciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaHabitacionesItemStateChanged(evt);
             }
         });
 
@@ -420,7 +424,7 @@ public void anotherComponents() {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(botonGuardarReservacion)
                 .addGap(216, 216, 216))
         );
         layout.setVerticalGroup(
@@ -472,7 +476,7 @@ public void anotherComponents() {
                         .addGap(4, 4, 4)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(botonGuardarReservacion)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -557,24 +561,32 @@ public void anotherComponents() {
 
     private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
         try {
-           saldoTotal = Integer.parseInt(jTextField3.getText());
+            saldoTotal = Integer.parseInt(jTextField3.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar solo numeros", "Error de dato", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jTextField3KeyReleased
 
-    private void listaHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaHabitacionesActionPerformed
-
-    }//GEN-LAST:event_listaHabitacionesActionPerformed
+    private void listaHabitacionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaHabitacionesItemStateChanged
+        String[] datos = cn.datosHabitacion((Integer) listaHabitaciones.getModel().getSelectedItem());
+        jLabel27.setText("Habitacion numero: " + (Integer) listaHabitaciones.getModel().getSelectedItem());
+        jLabel29.setText("Numero de camas: " + datos[0]);
+        jLabel28.setText("Numero de cuartos: " + datos[2]);
+        if (datos[2].equals("1")) {
+            jLabel30.setText("Vip: Si" );
+        }else{
+            jLabel30.setText("Vip: No" );
+        }
+    }//GEN-LAST:event_listaHabitacionesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoAcompananteText;
     private javax.swing.JButton botonGuardarAuto;
+    private javax.swing.JButton botonGuardarReservacion;
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JTextField documentoAcompananteText;
     private javax.swing.JTextField fechaNacAcompananteText;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
