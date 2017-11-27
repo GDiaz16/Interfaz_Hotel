@@ -122,6 +122,11 @@ public class Inicio extends javax.swing.JPanel {
         jLabel2.setToolTipText("");
 
         passwordText.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        passwordText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordTextActionPerformed(evt);
+            }
+        });
         passwordText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 passwordTextKeyReleased(evt);
@@ -193,6 +198,10 @@ public class Inicio extends javax.swing.JPanel {
         password = (String) passwordText.getText();
         System.out.println(password);
     }//GEN-LAST:event_passwordTextKeyReleased
+
+    private void passwordTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordTextActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
