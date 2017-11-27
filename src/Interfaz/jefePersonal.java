@@ -3,13 +3,13 @@
  */
 package Interfaz;
 
-
 //import Interfaz.CRUD;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 //import Interfaz.EmpleadoActivo;
 
 /**
@@ -34,42 +34,50 @@ public class jefePersonal extends javax.swing.JPanel {
     private long telefonoAcompanante;
     private String fechaNacAcompanante;
     ArrayList<EmpleadoActivo> empleados = new ArrayList<>();
+
     public jefePersonal() {
         initComponents();
     }
-    public Nomina d;
-    public Nomina e;
 
     private CRUD cn = new CRUD();
-    
+
     public void paint(Graphics g) {
 
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
         setOpaque(false);
         super.paint(g);
     }
-    
+
     public void cargarEmpleados() {
+
         for (int i = 0; i < cn.emp_documento.size(); i++) {
             empleados.add(new EmpleadoActivo(cn.emp_documento.get(i), cn.emp_nombres.get(i), cn.cargo.get(i), cn.emp_salario.get(i)));
             //System.out.println("panel " + i);
         }
-        for (EmpleadoActivo EmpleadoActivo: empleados) {
-           EmpleadoActivo.setVisible(true);
+        for (EmpleadoActivo EmpleadoActivo : empleados) {
+            EmpleadoActivo.setVisible(true);
             empAct.add(EmpleadoActivo);
         }
     }
-    public void cargarNomina(){
-       d = new Nomina(cn.nomina);
-       d.setVisible(true);
-       nomAct.add(d);
+
+    public void cargarNominaCargo() {
+        System.out.println("nomina cargo");
+        jDialog2.setLocationRelativeTo(this);
+        jDialog2.setVisible(true);
+        jLabel5.setText("Nomina total cargo: ");
+        carT.setText(cargot.getText());
+        valorNominaLabel.setText("$" + cn.consultarNominaCargo(cargot.getText()));
+
     }
-    public void cargarNomina2(){
-        e = new Nomina(cn.nomina2);
-        e.setVisible(true);
-        nomAct.add(e);
+
+    public void cargarNominaTotal() {
+        System.out.println("nomina total: ");
+        jDialog2.setLocationRelativeTo(this);
+        jDialog2.setVisible(true);
+        jLabel5.setText("Nomina total");
+        valorNominaLabel.setText("$" + cn.consultarNomina());
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,7 +89,7 @@ public class jefePersonal extends javax.swing.JPanel {
         jDialog2 = new javax.swing.JDialog();
         jLabel5 = new javax.swing.JLabel();
         carT = new javax.swing.JLabel();
-        nomAct = new javax.swing.JPanel();
+        valorNominaLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -91,10 +99,12 @@ public class jefePersonal extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        botonCerrarSesion = new javax.swing.JButton();
 
         jDialog1.setTitle("Lista de empleados");
         jDialog1.setMinimumSize(new java.awt.Dimension(420, 490));
         jDialog1.setModal(true);
+        jDialog1.setResizable(false);
 
         jLabel6.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel6.setText("Empleados con contrato activo");
@@ -121,45 +131,43 @@ public class jefePersonal extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
         );
 
-        jLabel5.setText("Nomina total del cargo ");
+        jDialog2.setTitle("Resultados de la busqueda");
+        jDialog2.setMinimumSize(new java.awt.Dimension(380, 150));
+        jDialog2.setModal(true);
+        jDialog2.setResizable(false);
 
-        javax.swing.GroupLayout nomActLayout = new javax.swing.GroupLayout(nomAct);
-        nomAct.setLayout(nomActLayout);
-        nomActLayout.setHorizontalGroup(
-            nomActLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        nomActLayout.setVerticalGroup(
-            nomActLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jLabel5.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+
+        carT.setFont(new java.awt.Font("Gill Sans MT", 1, 18)); // NOI18N
+
+        valorNominaLabel.setBackground(new java.awt.Color(102, 255, 0));
+        valorNominaLabel.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        valorNominaLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        valorNominaLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
         jDialog2.getContentPane().setLayout(jDialog2Layout);
         jDialog2Layout.setHorizontalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
-                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(carT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDialog2Layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(nomAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valorNominaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(carT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jDialog2Layout.setVerticalGroup(
             jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(carT, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
-                .addComponent(nomAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                    .addComponent(carT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(valorNominaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
         );
 
         setMinimumSize(new java.awt.Dimension(800, 600));
@@ -192,11 +200,7 @@ public class jefePersonal extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel1.setText("Empleados con contrato activo");
 
-        cargot.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cargotActionPerformed(evt);
-            }
-        });
+        cargot.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel4.setText("Costo total de nomina");
@@ -250,59 +254,68 @@ public class jefePersonal extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        botonCerrarSesion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonCerrarSesion.setText("Cerrar sesión");
+        botonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCerrarSesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(192, Short.MAX_VALUE)
+                .addContainerGap(183, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
+                .addGap(168, 168, 168))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(324, 324, 324)
+                .addComponent(botonCerrarSesion)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(133, 133, 133)
+                .addGap(148, 148, 148)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(242, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
+                .addComponent(botonCerrarSesion)
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        jDialog1.setLocationRelativeTo(this);
-        jDialog1.setVisible(true);
         cn.consultaEmpleadoActivo();
         cargarEmpleados();
+        jDialog1.setLocationRelativeTo(this);
+        jDialog1.setVisible(true);
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void cargotClienteKeyReleased(java.awt.event.KeyEvent evt) {                                          
-       
-    }  
-    
-    public String cargot(){
-        return  cargot.getText();
-    }
-    
-    private void cargotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargotActionPerformed
-    }//GEN-LAST:event_cargotActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        jDialog2.setLocationRelativeTo(this);
-        jDialog2.setVisible(true);
-        cn.consultarNomina();
-        cargarNomina();
+        cargarNominaTotal();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jDialog2.setLocationRelativeTo(this);
-        jDialog2.setVisible(true);
-        cn.consultarNomina2(cargot());
-        carT.setText(cargot());
-        cargarNomina2();
+        if (!cargot.getText().equals("")) {
+            cargarNominaCargo();
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese un cargo");
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
+        cn.cerrarConexion();
+        this.setVisible(false);
+        this.getTopLevelAncestor().add(new Inicio());
+    }//GEN-LAST:event_botonCerrarSesionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonCerrarSesion;
     private javax.swing.JLabel carT;
     private javax.swing.JTextField cargot;
     private javax.swing.JPanel empAct;
@@ -319,6 +332,6 @@ public class jefePersonal extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel nomAct;
+    private javax.swing.JLabel valorNominaLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -77,6 +77,8 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
+        jDialogReservacion = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         documentoCliente = new javax.swing.JTextField();
         botonGuardarResponsable = new javax.swing.JButton();
@@ -92,12 +94,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         apellidoCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        placaCliente = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        nuevoAcompanante = new javax.swing.JButton();
-        botonGuardarAuto = new javax.swing.JButton();
+        botonGuardarResponsable1 = new javax.swing.JButton();
         botonCerrarSesion = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -106,6 +103,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         buttonHabEspecifica = new javax.swing.JButton();
         buttonResumenHuespedes = new javax.swing.JButton();
         dispHabitacionLabel = new javax.swing.JLabel();
+        botonClienteExistente = new javax.swing.JButton();
 
         error1.setToolTipText("12335");
         error1.setInvoker(fechaNacCliente);
@@ -286,8 +284,28 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addComponent(jScrollPane1))
         );
 
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        jDialogReservacion.setTitle("Reservacion");
+        jDialogReservacion.setMinimumSize(new java.awt.Dimension(620, 500));
+        jDialogReservacion.setModal(true);
+        jDialogReservacion.setResizable(false);
 
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+
+        javax.swing.GroupLayout jDialogReservacionLayout = new javax.swing.GroupLayout(jDialogReservacion.getContentPane());
+        jDialogReservacion.getContentPane().setLayout(jDialogReservacionLayout);
+        jDialogReservacionLayout.setHorizontalGroup(
+            jDialogReservacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+        );
+        jDialogReservacionLayout.setVerticalGroup(
+            jDialogReservacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
+        );
+
+        setMinimumSize(new java.awt.Dimension(800, 630));
+        setPreferredSize(new java.awt.Dimension(800, 630));
+
+        documentoCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         documentoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 documentoClienteKeyReleased(evt);
@@ -295,19 +313,21 @@ public class panelRecepcionista extends javax.swing.JPanel {
         });
 
         botonGuardarResponsable.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        botonGuardarResponsable.setText("Guardar");
+        botonGuardarResponsable.setText("Hacer Reservacion");
         botonGuardarResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGuardarResponsableActionPerformed(evt);
             }
         });
 
+        telefonoCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         telefonoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 telefonoClienteKeyReleased(evt);
             }
         });
 
+        fechaNacCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         fechaNacCliente.setToolTipText("Formato fecha: AAAA-MM-DD");
         fechaNacCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -315,6 +335,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
             }
         });
 
+        modoPagoCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         modoPagoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 modoPagoClienteKeyReleased(evt);
@@ -341,11 +362,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Registro de nuevo huesped");
 
-        nombreCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreClienteActionPerformed(evt);
-            }
-        });
+        nombreCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         nombreCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nombreClienteKeyReleased(evt);
@@ -356,6 +373,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Fecha de Nacimiento");
 
+        apellidoCliente.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         apellidoCliente.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 apellidoClienteKeyReleased(evt);
@@ -366,11 +384,27 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Modo de pago");
 
+        botonGuardarResponsable1.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        botonGuardarResponsable1.setText("Limpiar");
+        botonGuardarResponsable1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarResponsable1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(botonGuardarResponsable1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(botonGuardarResponsable)))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -387,13 +421,17 @@ public class panelRecepcionista extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addComponent(apellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
-                        .addComponent(jLabel1)
-                        .addComponent(botonGuardarResponsable))
+                        .addComponent(jLabel1))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(413, Short.MAX_VALUE)
+                .addComponent(botonGuardarResponsable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonGuardarResponsable1)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -422,74 +460,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(modoPagoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(botonGuardarResponsable)
-                    .addContainerGap(23, Short.MAX_VALUE)))
-        );
-
-        jLabel8.setFont(new java.awt.Font("Gill Sans MT", 0, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Automovil");
-
-        placaCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                placaClienteKeyReleased(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel9.setText("Placa");
-
-        nuevoAcompanante.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
-        nuevoAcompanante.setText("Registrar Huesped Acompañante");
-        nuevoAcompanante.setEnabled(false);
-        nuevoAcompanante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoAcompananteActionPerformed(evt);
-            }
-        });
-
-        botonGuardarAuto.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
-        botonGuardarAuto.setText("Guardar");
-        botonGuardarAuto.setEnabled(false);
-        botonGuardarAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarAutoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9)
-                            .addComponent(placaCliente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonGuardarAuto))
-                    .addComponent(nuevoAcompanante))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(0, 0, 0)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(placaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonGuardarAuto))
-                .addGap(18, 18, 18)
-                .addComponent(nuevoAcompanante)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(88, Short.MAX_VALUE)))
         );
 
         botonCerrarSesion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
@@ -504,6 +475,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(51, 51, 51));
         jLabel16.setText("Consultas");
 
+        habEspecificaText.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
         habEspecificaText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 habEspecificaTextKeyReleased(evt);
@@ -514,7 +486,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(51, 51, 51));
         jLabel17.setText("Habitacion especifica");
 
-        buttonHabEspecifica.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        buttonHabEspecifica.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         buttonHabEspecifica.setText("Buscar");
         buttonHabEspecifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -522,7 +494,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
             }
         });
 
-        buttonResumenHuespedes.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        buttonResumenHuespedes.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         buttonResumenHuespedes.setText("Listado de huespedes actuales");
         buttonResumenHuespedes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -534,6 +506,14 @@ public class panelRecepcionista extends javax.swing.JPanel {
         dispHabitacionLabel.setForeground(new java.awt.Color(51, 51, 51));
         dispHabitacionLabel.setText("--");
 
+        botonClienteExistente.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
+        botonClienteExistente.setText("Reserva cliente existente");
+        botonClienteExistente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonClienteExistenteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -542,7 +522,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                         .addGap(185, 185, 185))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -553,9 +533,10 @@ public class panelRecepcionista extends javax.swing.JPanel {
                                 .addComponent(buttonHabEspecifica)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(buttonResumenHuespedes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dispHabitacionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(botonClienteExistente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonResumenHuespedes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dispHabitacionLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
@@ -573,7 +554,9 @@ public class panelRecepcionista extends javax.swing.JPanel {
                 .addComponent(dispHabitacionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonResumenHuespedes)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonClienteExistente)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -583,11 +566,9 @@ public class panelRecepcionista extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(221, 221, 221))
+                .addGap(65, 65, 65)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
             .addGroup(layout.createSequentialGroup()
                 .addGap(322, 322, 322)
                 .addComponent(botonCerrarSesion)
@@ -596,25 +577,28 @@ public class panelRecepcionista extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(42, 42, 42)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonCerrarSesion)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsableActionPerformed
         cn.insertarHuesped(documentoHuesped, nombreHuesped, apellidoHuesped, telefonoHuesped,
                 fechaNacHuesped, modoPagoHuesped, 0, 0);
-        if (cn.retorno == 1) {
-            botonGuardarAuto.setEnabled(true);
-            nuevoAcompanante.setEnabled(true);
+        if (cn.retorno) {
+            jPanel6.removeAll();
+            jPanel6.add(new panelReserva(documentoHuesped, false));
+            jDialogReservacion.setLocationRelativeTo(this);
+            jDialogReservacion.setVisible(true);
+
         }
     }//GEN-LAST:event_botonGuardarResponsableActionPerformed
 
@@ -646,7 +630,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
 
     private void fechaNacClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fechaNacClienteKeyReleased
         fechaNacHuesped = fechaNacCliente.getText();
-        
+
         if (fechaNacHuesped.length() >= 10) {
             System.out.println(fechaNacHuesped.substring(0, 4));
             System.out.println(fechaNacHuesped.substring(4, 5));
@@ -661,17 +645,6 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private void modoPagoClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_modoPagoClienteKeyReleased
         modoPagoHuesped = modoPagoCliente.getText();
     }//GEN-LAST:event_modoPagoClienteKeyReleased
-
-    private void placaClienteKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_placaClienteKeyReleased
-        placaHuesped = placaCliente.getText();
-    }//GEN-LAST:event_placaClienteKeyReleased
-
-    private void nuevoAcompananteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoAcompananteActionPerformed
-        System.out.println("Ventana");
-        ventanaHuesped.setLocationRelativeTo(this);
-        ventanaHuesped.setVisible(true);
-
-    }//GEN-LAST:event_nuevoAcompananteActionPerformed
 
     private void documentoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentoAcompananteTextKeyReleased
         try {
@@ -718,10 +691,6 @@ public class panelRecepcionista extends javax.swing.JPanel {
         apellidoAcompanante = apellidoAcompananteText.getText();
     }//GEN-LAST:event_apellidoAcompananteTextKeyReleased
 
-    private void botonGuardarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarAutoActionPerformed
-        cn.insertarAuto(placaHuesped, documentoHuesped);
-    }//GEN-LAST:event_botonGuardarAutoActionPerformed
-
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarSesionActionPerformed
         cn.cerrarConexion();
         this.setVisible(false);
@@ -756,17 +725,31 @@ public class panelRecepcionista extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_habEspecificaTextKeyReleased
 
-    private void nombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nombreClienteActionPerformed
+    private void botonClienteExistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteExistenteActionPerformed
+        jPanel6.removeAll();
+        jPanel6.add(new panelReserva(documentoHuesped, true));
+        jDialogReservacion.setLocationRelativeTo(this);
+        jDialogReservacion.setVisible(true);
+        
+    }//GEN-LAST:event_botonClienteExistenteActionPerformed
+
+    private void botonGuardarResponsable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsable1ActionPerformed
+    nombreCliente.setText("");
+    apellidoCliente.setText("");
+    documentoCliente.setText("");
+    telefonoCliente.setText("");
+    fechaNacCliente.setText("");
+    modoPagoCliente.setText("");
+    }//GEN-LAST:event_botonGuardarResponsable1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoAcompananteText;
     private javax.swing.JTextField apellidoCliente;
     private javax.swing.JButton botonCerrarSesion;
-    private javax.swing.JButton botonGuardarAuto;
+    private javax.swing.JButton botonClienteExistente;
     private javax.swing.JButton botonGuardarResponsable;
+    private javax.swing.JButton botonGuardarResponsable1;
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JButton buttonHabEspecifica;
     private javax.swing.JButton buttonResumenHuespedes;
@@ -778,6 +761,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JTextField fechaNacCliente;
     private javax.swing.JTextField habEspecificaText;
     private javax.swing.JDialog jDialogResHuespedes;
+    private javax.swing.JDialog jDialogReservacion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -794,19 +778,15 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField modoPagoCliente;
     private javax.swing.JTextField nombreAcompananteText;
     private javax.swing.JTextField nombreCliente;
-    private javax.swing.JButton nuevoAcompanante;
-    private javax.swing.JTextField placaCliente;
     private javax.swing.JTextField telefonoAcompananteText;
     private javax.swing.JTextField telefonoCliente;
     private javax.swing.JDialog ventanaHuesped;
