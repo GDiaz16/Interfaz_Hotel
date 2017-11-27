@@ -23,7 +23,11 @@ public class CRUD {
     public ArrayList<String> apellidos = new ArrayList<>();
     public ArrayList<String> nombres = new ArrayList<>();
     public ArrayList<Long> telefonos = new ArrayList<>();
-
+    public ArrayList<Long> emp_documento = new ArrayList<>();
+    public ArrayList<String> emp_nombres = new ArrayList<>();
+    public ArrayList<String> cargo = new ArrayList<>();
+    public ArrayList<String> emp_contrato = new ArrayList<>();
+    public ArrayList<Long> emp_salario = new ArrayList<>();
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
 
@@ -51,7 +55,23 @@ public class CRUD {
             retorno = 0;
         }
     }
-
+  public void consultaEmpleadoActivo() {
+        try {
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select * from empleado_activo;");
+            while (rs.next()) {
+                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(4) + "\t\t" + rs.getString(5)+ "\t\t" + rs.getLong(9));
+                emp_documento.add(rs.getLong(1));
+                emp_nombres.add(rs.getString(2));
+                cargo.add(rs.getString(4));
+                emp_contrato.add(rs.getString(5));
+                emp_salario.add(rs.getLong(9));
+                
+            }
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar consulta ... FAIL");
+        }
+    }
     public void insertarAuto(String placa, long idHuesped) {
         try {
 

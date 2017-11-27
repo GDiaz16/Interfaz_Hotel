@@ -58,6 +58,15 @@ public class Inicio extends javax.swing.JPanel {
             case "Jefe de personal":
                 this.user = "jefe_personal";
                 System.out.println("azc");
+                cn.conexionUsuario(this.user, password);
+                System.out.println("conect " + cn.conect);
+                if (cn.conect == 1) {
+                    this.setVisible(false);
+                    this.getTopLevelAncestor().add(new NewJPanel());
+                } else if (cn.conect == 0) {
+                    JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrecta", "Mensaje de la BD",
+                            JOptionPane.ERROR_MESSAGE);
+                }
                 break;
 
         }
