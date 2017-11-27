@@ -28,8 +28,8 @@ public class CRUD {
     public ArrayList<String> cargo = new ArrayList<>();
     public ArrayList<String> emp_contrato = new ArrayList<>();
     public ArrayList<Long> emp_salario = new ArrayList<>();
-    public String nominaTotal;
-    public String nominaCargo;
+    public String nominaTotal = "";
+    public String nominaCargo = "";
 
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
@@ -118,7 +118,7 @@ public class CRUD {
     }
 
     public String consultarNominaCargo(String carg) {
-
+        
         try {
             CallableStatement parametro = conexion.prepareCall("select nomina(?);");
             parametro.setString(1, carg + "");
