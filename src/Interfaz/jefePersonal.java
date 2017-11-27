@@ -3,6 +3,7 @@
  */
 package Interfaz;
 
+
 //import Interfaz.CRUD;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -36,6 +37,8 @@ public class jefePersonal extends javax.swing.JPanel {
     public jefePersonal() {
         initComponents();
     }
+    public Nomina d;
+    public Nomina e;
 
     private CRUD cn = new CRUD();
     
@@ -56,6 +59,16 @@ public class jefePersonal extends javax.swing.JPanel {
             empAct.add(EmpleadoActivo);
         }
     }
+    public void cargarNomina(){
+       d = new Nomina(cn.nomina);
+       d.setVisible(true);
+       nomAct.add(d);
+    }
+    public void cargarNomina2(){
+        e = new Nomina(cn.nomina2);
+        e.setVisible(true);
+        nomAct.add(e);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -65,12 +78,16 @@ public class jefePersonal extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         empAct = new javax.swing.JPanel();
+        jDialog2 = new javax.swing.JDialog();
+        jLabel5 = new javax.swing.JLabel();
+        carT = new javax.swing.JLabel();
+        nomAct = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        cargot = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -104,6 +121,47 @@ public class jefePersonal extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
         );
 
+        jLabel5.setText("Nomina total del cargo ");
+
+        javax.swing.GroupLayout nomActLayout = new javax.swing.GroupLayout(nomAct);
+        nomAct.setLayout(nomActLayout);
+        nomActLayout.setHorizontalGroup(
+            nomActLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        nomActLayout.setVerticalGroup(
+            nomActLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(carT, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialog2Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(nomAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(carT, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(65, 65, 65)
+                .addComponent(nomAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
+        );
+
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
@@ -117,6 +175,11 @@ public class jefePersonal extends javax.swing.JPanel {
 
         jButton3.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jButton3.setText("Ver  ahora");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jButton4.setText("Ver total");
@@ -129,9 +192,9 @@ public class jefePersonal extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel1.setText("Empleados con contrato activo");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        cargot.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                cargotActionPerformed(evt);
             }
         });
 
@@ -156,7 +219,7 @@ public class jefePersonal extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1))
+                            .addComponent(cargot))
                         .addComponent(jLabel2))
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -177,7 +240,7 @@ public class jefePersonal extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cargot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jButton3))
                 .addGap(35, 35, 35)
@@ -212,29 +275,50 @@ public class jefePersonal extends javax.swing.JPanel {
         cargarEmpleados();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(20);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void cargotClienteKeyReleased(java.awt.event.KeyEvent evt) {                                          
+       
+    }  
+    
+    public String cargot(){
+        return  cargot.getText();
+    }
+    
+    private void cargotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargotActionPerformed
+    }//GEN-LAST:event_cargotActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        jDialog2.setLocationRelativeTo(this);
+        jDialog2.setVisible(true);
+        cn.consultarNomina();
+        cargarNomina();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jDialog2.setLocationRelativeTo(this);
+        jDialog2.setVisible(true);
+        cn.consultarNomina2(cargot());
+        carT.setText(cargot());
+        cargarNomina2();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel carT;
+    private javax.swing.JTextField cargot;
     private javax.swing.JPanel empAct;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel nomAct;
     // End of variables declaration//GEN-END:variables
 }
