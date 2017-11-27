@@ -20,21 +20,23 @@ public class panelReserva extends javax.swing.JPanel {
     private int numeroHabitacion;
     private long documentoHuesped;
 
-    public panelReserva(long idHuesped) {
+    public panelReserva(long idHuesped, boolean existente) {
         documentoHuesped = idHuesped;
         initComponents();
-        anotherComponents();
+        anotherComponents(existente);
     }
 
-    public void anotherComponents() {
+    public void anotherComponents(boolean existente) {
         Integer[] habitaciones = new Integer[cn.habitacionesLibres().size()];
         for (int i = 0; i < cn.habitacionesLibres().size(); i++) {
             habitaciones[i] = cn.habitacionesLibres().get(i);
         }
         listaHabitaciones.setModel(new DefaultComboBoxModel(habitaciones));
-//        listaHabitaciones.setLocation(600, 500);
-       listaHabitaciones.setVisible(true);
-
+        listaHabitaciones.setVisible(true);
+        if (!existente){
+            jTextField6.setEnabled(false);
+            jTextField6.setText(documentoHuesped+"");
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -278,10 +280,20 @@ public class panelReserva extends javax.swing.JPanel {
         jLabel26.setText("Documento cliente responsable");
 
         jTextField6.setFont(new java.awt.Font("Gill Sans MT", 0, 12)); // NOI18N
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField6KeyReleased(evt);
+            }
+        });
 
         botonGuardarReservacion.setBackground(new java.awt.Color(204, 204, 204));
         botonGuardarReservacion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         botonGuardarReservacion.setText("Guardar reservacion");
+        botonGuardarReservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarReservacionActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
@@ -511,6 +523,15 @@ public class panelReserva extends javax.swing.JPanel {
         System.out.println("Responsable: " + documentoHuesped);
         cn.insertarHuesped(documentoAcompanante, nombreAcompanante, apellidoAcompanante,
                 telefonoAcompanante, fechaNacAcompanante, "", documentoHuesped, 1);
+        if (cn.retorno ) {
+            ventanaHuesped.setVisible(false);
+            nombreAcompananteText.setText("");
+            apellidoAcompananteText.setText("");
+            documentoAcompananteText.setText("");
+            telefonoAcompananteText.setText("");
+            fechaNacAcompananteText.setText("");
+
+        }
     }//GEN-LAST:event_buttonAcompananteActionPerformed
 
     private void telefonoAcompananteTextKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_telefonoAcompananteTextKeyReleased
@@ -573,11 +594,20 @@ public class panelReserva extends javax.swing.JPanel {
         jLabel29.setText("Numero de camas: " + datos[0]);
         jLabel28.setText("Numero de cuartos: " + datos[2]);
         if (datos[2].equals("1")) {
-            jLabel30.setText("Vip: Si" );
-        }else{
-            jLabel30.setText("Vip: No" );
+            jLabel30.setText("Vip: Si");
+        } else {
+            jLabel30.setText("Vip: No");
         }
     }//GEN-LAST:event_listaHabitacionesItemStateChanged
+
+    private void botonGuardarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarReservacionActionPerformed
+        int hab = (Integer) listaHabitaciones.getModel().getSelectedItem();
+        cn.insertarReserva(abono, fechaInicio, fechaFin, saldoTotal, hab, documentoHuesped);
+    }//GEN-LAST:event_botonGuardarReservacionActionPerformed
+
+    private void jTextField6KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyReleased
+        documentoHuesped =  Long.parseLong(jTextField6.getText());
+    }//GEN-LAST:event_jTextField6KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

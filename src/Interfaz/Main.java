@@ -19,7 +19,7 @@ public class Main {
         JFrame frame = new JFrame("Hotel Continental");
         frame.setBackground(Color.decode("#58D3F7"));
         frame.add(new Inicio());
-        frame.setSize(800, 600);
+        frame.setSize(800, 630);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);

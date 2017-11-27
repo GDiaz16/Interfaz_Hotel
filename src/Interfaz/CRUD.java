@@ -16,7 +16,7 @@ public class CRUD {
     private static String bd = "hotel";
     private static String host = "localhost";
     private static String server = "jdbc:mysql://" + host + "/" + bd;
-    public int retorno;
+    public boolean retorno;
     public int conect;
     public int estado;
     public ArrayList<Long> IDs = new ArrayList<>();
@@ -28,6 +28,8 @@ public class CRUD {
     public ArrayList<String> cargo = new ArrayList<>();
     public ArrayList<String> emp_contrato = new ArrayList<>();
     public ArrayList<Long> emp_salario = new ArrayList<>();
+    public String nominaTotal;
+    public String nominaCargo;
 
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
@@ -46,14 +48,38 @@ public class CRUD {
             parametro.setString(3, apellido);
             parametro.setString(4, telefono + "");
             parametro.setString(5, fechaNacimiento);
-            retorno = 1;
+            retorno = true;
             parametro.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD",
                     JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Fallo en el procedimiento", "Mensaje", JOptionPane.ERROR_MESSAGE);
-            retorno = 0;
+            retorno = false;
+        }
+    }
+
+    public void insertarReserva(int abono, String fechaInicio, String fechaFin,
+            int saldoTotal, int habID, long huespedID) {
+
+        try {
+            PreparedStatement parametro;
+            PreparedStatement actualizacion;
+            parametro = conexion.prepareStatement("CALL agregar_reserva(?,?,?,?,?,?);");
+            actualizacion = conexion.prepareStatement("CALL hab_a_desocupadas();");
+            parametro.setString(1, abono + "");
+            parametro.setString(2, fechaInicio);
+            parametro.setString(3, fechaFin);
+            parametro.setString(4, saldoTotal + "");
+            parametro.setString(5, habID + "");
+            parametro.setString(6, huespedID + "");
+            parametro.executeUpdate();
+            actualizacion.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro exitoso", "Mensaje de la BD",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Fallo en el procedimiento", "Mensaje", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -73,6 +99,44 @@ public class CRUD {
         } catch (SQLException ex) {
             System.out.println("Imposible realizar consulta ... FAIL");
         }
+    }
+
+    public String consultarNomina() {
+        try {
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select nomina('')");
+            while (rs.next()) {
+                //System.out.println(rs.getString(1));
+                nominaTotal = rs.getString(1);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar consulta ... FAIL");
+
+        }
+        return nominaTotal;
+    }
+
+    public String consultarNominaCargo(String carg) {
+
+        try {
+            CallableStatement parametro = conexion.prepareCall("select nomina(?);");
+            parametro.setString(1, carg + "");
+            parametro.execute();
+            ResultSet rs = parametro.getResultSet();
+            if (rs.next()) {
+                nominaCargo = rs.getString(1);
+                //System.out.println(retorno);
+            } else {
+                nominaCargo = "";
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Fallo en el procedimiento", "Mensaje", JOptionPane.ERROR_MESSAGE);
+            nominaCargo = "";
+        }
+        return nominaCargo;
+
     }
 
     public void insertarAuto(String placa, long idHuesped) {
@@ -132,13 +196,13 @@ public class CRUD {
     public String[] datosHabitacion(int id) {
         String[] datos = new String[3];
         String consulta = "select hab_numeroCamas,hab_numeroCuartos,hab_vip FROM hab_desocupadas where hab_numero = ?;";
-        
+
         try {
             CallableStatement parametro = conexion.prepareCall(consulta);
             parametro.setString(1, id + "");
             parametro.execute();
             ResultSet rs = parametro.getResultSet();
-                     
+
             while (rs.next()) {
                 System.out.println(rs.getInt(1));
                 datos[0] = rs.getInt(1) + "";
