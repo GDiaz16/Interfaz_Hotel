@@ -28,6 +28,9 @@ public class CRUD {
     public ArrayList<String> cargo = new ArrayList<>();
     public ArrayList<String> emp_contrato = new ArrayList<>();
     public ArrayList<Long> emp_salario = new ArrayList<>();
+    public String nomina;
+    public String nomina2;
+
     public void insertarHuesped(long documento, String nombre, String apellido,
             long telefono, String fechaNacimiento, String modoPago, long idResponsable, int huesped) {
 
@@ -55,23 +58,62 @@ public class CRUD {
             retorno = 0;
         }
     }
-  public void consultaEmpleadoActivo() {
+
+    public void consultaEmpleadoActivo() {
         try {
             Statement s = conexion.createStatement();
             ResultSet rs = s.executeQuery("select * from empleado_activo;");
             while (rs.next()) {
-                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(4) + "\t\t" + rs.getString(5)+ "\t\t" + rs.getLong(9));
+                System.out.println(rs.getLong(1) + "\t\t" + rs.getString(2) + "\t\t" + rs.getString(4) + "\t\t" + rs.getString(5) + "\t\t" + rs.getLong(9));
                 emp_documento.add(rs.getLong(1));
                 emp_nombres.add(rs.getString(2));
                 cargo.add(rs.getString(4));
                 emp_contrato.add(rs.getString(5));
                 emp_salario.add(rs.getLong(9));
-                
+
             }
         } catch (SQLException ex) {
             System.out.println("Imposible realizar consulta ... FAIL");
         }
     }
+
+    public void consultarNomina() {
+        try {
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select nomina('')");
+            while (rs.next()) {
+                System.out.println(rs.getString(1));
+                nomina = rs.getString(1);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar consulta ... FAIL");
+            
+        }
+    }
+
+    public String consultarNomina2(String carg) {
+         String retorno;
+        try {
+
+            CallableStatement parametro = conexion.prepareCall("select nomina(?);");
+            parametro.setString(1, carg+ "");
+            parametro.execute();
+            ResultSet rs = parametro.getResultSet();
+            if (rs.next()) {
+                retorno = rs.getString(1);
+                System.out.println(retorno);
+            } else {
+                retorno = "";
+            }
+
+        } catch (SQLException ex) {
+            retorno = "";
+        }
+        return retorno;
+    
+    }
+
     public void insertarAuto(String placa, long idHuesped) {
         try {
 
