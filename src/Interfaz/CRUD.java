@@ -109,7 +109,22 @@ public class CRUD {
         }
         return retorno;
     }
-
+    public ArrayList<Integer> habitacionesLibres(){
+        ArrayList<Integer> habitaciones = new ArrayList<>();
+        try {
+            Statement s = conexion.createStatement();
+            ResultSet rs = s.executeQuery("select * from hab_desocupadas;");
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) );
+                habitaciones.add(rs.getInt(1));
+                               
+            }
+        } catch (SQLException ex) {
+            System.out.println("Imposible realizar consulta ... FAIL");
+        }
+        return habitaciones;
+    }
+    
     public void delete() {
         //id de lo que se vaya a borrar
         String id = "";
