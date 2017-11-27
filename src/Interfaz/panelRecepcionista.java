@@ -94,6 +94,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         apellidoCliente = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        botonGuardarResponsable1 = new javax.swing.JButton();
         botonCerrarSesion = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -383,11 +384,27 @@ public class panelRecepcionista extends javax.swing.JPanel {
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Modo de pago");
 
+        botonGuardarResponsable1.setFont(new java.awt.Font("Gill Sans MT", 0, 14)); // NOI18N
+        botonGuardarResponsable1.setText("Limpiar");
+        botonGuardarResponsable1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarResponsable1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 288, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(botonGuardarResponsable1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(botonGuardarResponsable)))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -404,13 +421,17 @@ public class panelRecepcionista extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addComponent(apellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
-                        .addComponent(jLabel1)
-                        .addComponent(botonGuardarResponsable))
+                        .addComponent(jLabel1))
                     .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(413, Short.MAX_VALUE)
+                .addComponent(botonGuardarResponsable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonGuardarResponsable1)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
@@ -439,9 +460,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(modoPagoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(20, 20, 20)
-                    .addComponent(botonGuardarResponsable)
-                    .addContainerGap(23, Short.MAX_VALUE)))
+                    .addContainerGap(88, Short.MAX_VALUE)))
         );
 
         botonCerrarSesion.setFont(new java.awt.Font("Gill Sans MT", 0, 18)); // NOI18N
@@ -567,7 +586,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonCerrarSesion)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -714,6 +733,15 @@ public class panelRecepcionista extends javax.swing.JPanel {
         
     }//GEN-LAST:event_botonClienteExistenteActionPerformed
 
+    private void botonGuardarResponsable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarResponsable1ActionPerformed
+    nombreCliente.setText("");
+    apellidoCliente.setText("");
+    documentoCliente.setText("");
+    telefonoCliente.setText("");
+    fechaNacCliente.setText("");
+    modoPagoCliente.setText("");
+    }//GEN-LAST:event_botonGuardarResponsable1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoAcompananteText;
@@ -721,6 +749,7 @@ public class panelRecepcionista extends javax.swing.JPanel {
     private javax.swing.JButton botonCerrarSesion;
     private javax.swing.JButton botonClienteExistente;
     private javax.swing.JButton botonGuardarResponsable;
+    private javax.swing.JButton botonGuardarResponsable1;
     private javax.swing.JButton buttonAcompanante;
     private javax.swing.JButton buttonHabEspecifica;
     private javax.swing.JButton buttonResumenHuespedes;
